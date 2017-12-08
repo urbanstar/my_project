@@ -63,4 +63,7 @@ class BD{
         // TODO: Implement __destruct() method.
     }
 }
+
+// мой коментарий!!!!!!!!!!!!!!!!!!
 ?>
+
