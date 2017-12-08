@@ -34,10 +34,3 @@ class Articles{
     }
 
 }
-
-/**
- * Created by PhpStorm.
- * User: usrtoo
- * Date: 28.11.2017
- * Time: 20:21
- */
