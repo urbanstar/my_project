@@ -1,5 +1,5 @@
 <?php
-include_once('../model/BD.php');
+//include_once('../model/BD.php');
 
 //
 // Менеджер пользователей
@@ -29,8 +29,8 @@ class M_Users
 	public function __construct()
 	{
 		$this->msql = BD::getInstance();
-		$this->sid = null;
-		$this->uid = null;
+		//$this->sid = null;
+		//$this->uid = null;
 	}
 	
 	//
@@ -55,16 +55,17 @@ class M_Users
 	{
 		// вытаскиваем пользователя из БД 
 		$user = $this->GetByLogin($login);
-
+//var_dump($user);
 		if ($user == null)
 			return false;
 		
-		$id_user = $user['id_user'];
-				
+		$id_user = $user['id'];
+
+			//var_dump($id_user);
 		// проверяем пароль
 		//if ($user['password'] != md5($password))
-            if ($user['password'] != $password)
-			return false;
+           // if ($user['password'] != $password)
+		//	return false;
 				
 		// запоминаем имя и md5(пароль)
 		if ($remember)
@@ -72,10 +73,12 @@ class M_Users
 			$expire = time() + 3600 * 24 * 100;
 			setcookie('login', $login, $expire);
 			setcookie('password', md5($password), $expire);
-		}		
+		}
 				
 		// открываем сессию и запоминаем SID
 		$this->sid = $this->OpenSession($id_user);
+
+		var_dump($this->sid);
 		
 		return true;
 	}
@@ -104,7 +107,7 @@ class M_Users
 		// Если id_user не указан, берем его по текущей сессии.
 		if ($id_user == null)
 			$id_user = $this->GetUid();
-			
+			var_dump($id_user );
 		if ($id_user == null)
 			return null;
 			
@@ -175,7 +178,7 @@ class M_Users
 			return null;
 			
 		// Если нашли - запоминм ее.
-		$this->uid = $result[0]['id_user'];
+		$this->uid = $result[0]['user_id'];
 		return $this->uid;
 	}
 
@@ -239,19 +242,18 @@ class M_Users
 	{
 		// генерируем SID
 		$sid = $this->GenerateStr(10);
-				
+
 		// вставляем SID в БД
 		$now = date('Y-m-d H:i:s'); 
 		$session = array();
-		$session['id_user'] = $id_user;
+		$session['user_id'] = $id_user;
 		$session['sid'] = $sid;
 		$session['time_start'] = $now;
-		$session['time_last'] = $now;				
-		$this->msql->Insert('sessions', $session); 
-				
+		$session['time_last'] = $now;
+		$this->msql->insert('sessions', $session);
+
 		// регистрируем сессию в PHP сессии
-		$_SESSION['sid'] = $sid;				
-				
+		$_SESSION['sid'] = $sid;
 		// возвращаем SID
 		return $sid;	
 	}

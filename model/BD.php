@@ -34,14 +34,16 @@ class BD{
         return null;
     }
     public function insert($table, $object){
-        $column=array();
-        $value=array();
+        $columns=array();
+        $values=array();
         foreach ($object as $key=>$value){
-            $column[]=$key;
-            $value[]=$value;
+            $columns[]=$key;
+            $values[]="'$value'";
         }
-        $query="INSERT INTO $table ($column) VALUES ('$value')";
-        $query=mysql_real_escape_string($query);
+        $column_string=implode(',', $columns);
+        $values_string=implode(',', $values);
+        $query="INSERT INTO $table ($column_string) VALUES ($values_string)";
+       // $query=mysql_real_escape_string($query);
         mysql_query($query);
         return mysql_insert_id();
     }
@@ -63,6 +65,4 @@ class BD{
         // TODO: Implement __destruct() method.
     }
 }
-
 ?>
-

@@ -55,7 +55,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="view/v_log_pas.php"><?=$user?></a>
+                        <a class="nav-link" href="view/v_log_pas.php"><?php if (!($user=='guest')) echo $user; else echo 'Войти'; ?></a>
                     </li>
 
                 </ul>

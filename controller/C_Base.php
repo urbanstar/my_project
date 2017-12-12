@@ -6,12 +6,17 @@ abstract class C_Base extends C_Controller
 {
 	protected $title;		// заголовок страницы
 	protected $content;		// содержание страницы
-    protected $user; // кто вошел
+    protected $user='guest'; // кто вошел
 
 	// Конструктор.
 	function __construct()
 	{
-	   $this->user=M_Users::Instance()->Get();
+
+	   if (M_Users::Instance()->Get()){
+	       $this->user=M_Users::Instance()->Get();
+       };
+        var_dump(M_Users::Instance()->Get());
+
 
 	}
 	
