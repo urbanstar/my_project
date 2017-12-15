@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav text-md-center nav-justified w-100">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.php">Главная <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="view/v_add_update_article.php">Статьи</a>
@@ -55,7 +55,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="view/v_log_pas.php"><?php if (!($user=='guest')) echo $user; else echo 'Войти'; ?></a>
+                        <a class="nav-link" href="index.php?c=Auth&action=view"><?php if (!($user=='guest')) echo $user; else echo 'Войти'; ?></a>
                     </li>
 
                 </ul>

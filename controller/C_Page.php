@@ -1,20 +1,10 @@
 <?php
 
-// Конттроллер страницы чтения.
-include_once('model/model.php');
-
 class C_Page extends C_Base
 {
-
-    // Конструктор.
     public function action_index()
     {
-        if ($this->isPost()) {
-            text_set($_POST['text']);
-            header('location: index.php');
-            exit();
-        }
-        $articles = Articles::getInstance();
+        $articles = M_Articles::getInstance();
         $text = $articles->getAll();
         $this->content = $this->template('view/v_view.php', array('text' => $text));
     }
@@ -43,7 +33,7 @@ class C_Page extends C_Base
             exit();
         }
 
-        $articles = Articles::getInstance();
+        $articles = MArticles::getInstance();
         $text = $articles->getAll();
         $this->content = $this->template('view/v_view.php', array('text' => $text));
     }
